@@ -1,0 +1,58 @@
+{% extends 'layouts/layout.html' %} 
+
+{% block content %}
+{% load static %}
+{% if messages %}
+    {% for message in messages %}
+        <div>
+            <script>
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "{{ message }}",
+                    showConfirmButton: false,
+                    timer: 3500
+                  });
+            </script>
+        </div>
+    {% endfor %}
+{% endif %}
+
+    <!-- ================ Best Selling item  carousel ================= --> 
+    <section class="section-margin calc-60px">
+        <div class="container">
+          <div class="section-intro pb-60px">
+            <p>Popular Item in the market</p>
+            <h2>Nuestros <span class="section-intro__style">Vendedores</span></h2>
+          </div>
+          <div class="owl-carousel owl-theme" id="bestSellerCarousel">
+            {% for recolector in recolectores %}
+                <div class="card text-center card-product">
+                    <div class="card-product__img">
+                        <img class="img-fluid" src="img/product/product1.png" alt="">
+                        <ul class="card-product__imgOverlay">
+                        <li><button><i class="ti-search"></i></button></li>
+                        <li><button><i class="ti-shopping-cart"></i></button></li>
+                        <li><button><i class="ti-heart"></i></button></li>
+                        </ul>
+                    </div>
+                <div class="card-body">
+                    <p>Accessories</p>
+                    <h4 class="card-product__title"><a href="single-product.html">{{recolector.nombres}} {{recolector.apellido}}</a></h4>
+                    <p class="card-product__price">CC. {{recolector.cedula}}</p>
+                    <p class="card-product__price">Dirección. {{recolector.direccion}}</p>
+                    <p class="card-product__price">Cumpleaños. {{recolector.fNacimiento}}</p>
+                    <p class="card-product__price">Telefono. {{recolector.telefono}}</p>
+                    <p class="card-product__price">Edad. {{recolector.telefono}}</p>
+                    <a class="share btn btn-primary btn-md-square rounded-circle mb-2" href="{% url 'ver_recolector' recolector.pk %}"><i class="fas fa-share-alt"></i></a>
+                </div>
+                </div>
+    
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ================ Best Selling item  carousel end ================= --> 
+
+{% endblock %}
